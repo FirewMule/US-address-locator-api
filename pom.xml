@@ -23,12 +23,12 @@
 			<plugin>
 				<groupId>org.mule.tools.maven</groupId>
 				<artifactId>mule-maven-plugin</artifactId>
-				<version>3.3.5</version>
+				<version>${mule.maven.plugin.version}</version>
 				<extensions>true</extensions>
 				<configuration>
 				<cloudHubDeployment>
 							<uri>https://anypoint.mulesoft.com</uri>
-							<muleVersion>4.2.2</muleVersion>
+							<muleVersion>${mule.version}</muleVersion>
 							<username>${username}</username>
 							<password>${password}</password>
 							<workers>${workers}</workers>
