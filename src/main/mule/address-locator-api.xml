@@ -5,17 +5,17 @@
 	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
 http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
 http://www.mulesoft.org/schema/mule/wsc http://www.mulesoft.org/schema/mule/wsc/current/mule-wsc.xsd">
-	<http:listener-config name="HTTP_Listener_config" doc:name="HTTP Listener config" doc:id="f9d3294a-13bf-4fbf-be28-061695f91fc2" >
+	<http:listener-config name="HTTP_Listener_config" doc:name="HTTP Listener config" doc:id="f9d3294a-13bf-4fbf-be28-061695f91fc2" basePath="/country">
 		<http:listener-connection host="0.0.0.0" port="8081" />
 	</http:listener-config>
 	<http:request-config name="HTTP_Request_configuration" doc:name="HTTP Request configuration" doc:id="bb5dcf8e-3597-421b-ada7-afebc8210ca5" basePath="/country">
 		<http:request-connection host="api.zippopotam.us" />
 	</http:request-config>
 	<flow name="address-locator-apiFlow" doc:id="de6f8754-64d3-4966-8132-b3abc927dcb9" >
-		<http:listener doc:name="GET /postal-code" doc:id="81fe3ac1-9592-4393-8380-0f10af4d808e" config-ref="HTTP_Listener_config" path="us/postal-code" allowedMethods="GET"/>
+		<http:listener doc:name="GET /postal-code" doc:id="81fe3ac1-9592-4393-8380-0f10af4d808e" config-ref="HTTP_Listener_config" path="/postal-code" allowedMethods="GET"/>
 		<logger level="INFO" doc:name="Payload" doc:id="cbef13c0-189e-47f3-9f4e-d2fefc31fa27" message="#[payload]" />
 		<try doc:name="Try" doc:id="0e569eeb-96c6-49ce-862f-a0f90327724c" >
-			<http:request method="GET" doc:name="Request" doc:id="049635e0-2fd4-4d7f-91ee-aa52c12fba69" config-ref="HTTP_Request_configuration" path="/postal-code" >
+			<http:request method="GET" doc:name="Request" doc:id="049635e0-2fd4-4d7f-91ee-aa52c12fba69" config-ref="HTTP_Request_configuration" path="/[postal-code]" >
 				<http:uri-params ><![CDATA[#[output application/java
 ---
 {
