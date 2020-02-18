@@ -8,7 +8,7 @@ pipeline{
  		}
  	}
 	
-	stage ('Test'){
+	stage ('Munit Test'){
  		steps {
  			
  				bat 'mvn clean install'
