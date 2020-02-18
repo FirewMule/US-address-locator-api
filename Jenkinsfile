@@ -18,7 +18,7 @@ pipeline{
  	stage ('Deploy Application'){
  		steps {
  			
- 				bat 'mvn clean package deploy mvn package deploy -DmuleDeploy -Dusername=max356 -Dpassword=@@Gaga356@@ -Dworkers=1 -Dworker.type=Micro -Denvironment=Sandbox -Dapplication.name=address-locator-API -DmuleDeploy'
+ 				bat 'mvn clean package deploy -Dusername=max356 -Dpassword=@@Gaga356@@ -Denvironment=Sandbox -Dworkers=1 -Dworker.type=Micro -Dapplication.name=address-locator-API -DmuleDeploy'
  			}
  		}
  	}
