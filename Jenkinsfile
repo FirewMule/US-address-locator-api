@@ -7,6 +7,13 @@ pipeline{
  				bat 'mvn clean install'
  		}
  	}
+ 	
+ 	stage ('Test Application'){
+ 		steps {
+ 			
+ 				bat 'mvn clean test'
+ 		}
+ 	}
 
  	stage ('Deploy Application'){
  		steps {
