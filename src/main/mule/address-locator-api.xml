@@ -12,9 +12,16 @@ http://www.mulesoft.org/schema/mule/wsc http://www.mulesoft.org/schema/mule/wsc/
 		<http:request-connection host="api.zippopotam.us" />
 	</http:request-config>
 	<flow name="address-locator-apiFlow" doc:id="de6f8754-64d3-4966-8132-b3abc927dcb9" >
-		<http:listener doc:name="GET /postal-code" doc:id="81fe3ac1-9592-4393-8380-0f10af4d808e" config-ref="HTTP_Listener_config" path="/postal-code"/>
+		<http:listener doc:name="GET /postal-code" doc:id="81fe3ac1-9592-4393-8380-0f10af4d808e" config-ref="HTTP_Listener_config" path="/postal-code" allowedMethods="GET"/>
 		<logger level="INFO" doc:name="Payload" doc:id="cbef13c0-189e-47f3-9f4e-d2fefc31fa27" message="#[payload]" />
-		<http:request method="GET" doc:name="Request" doc:id="049635e0-2fd4-4d7f-91ee-aa52c12fba69" config-ref="HTTP_Request_configuration" path="/postal-code"/>
+		<try doc:name="Try" doc:id="0e569eeb-96c6-49ce-862f-a0f90327724c" >
+			<http:request method="GET" doc:name="Request" doc:id="049635e0-2fd4-4d7f-91ee-aa52c12fba69" config-ref="HTTP_Request_configuration" path="/postal-code" />
+			<error-handler >
+				<on-error-continue enableNotifications="true" logException="true" doc:name="On Error Continue" doc:id="cc2fb2d2-8ac6-4c8e-87d7-d38f5a9e5f94" type="HTTP:NOT_FOUND">
+					<set-payload value="#[404]" doc:name="Set Payload" doc:id="277d05c3-62a6-47fb-8b4e-e3126647e69f" />
+				</on-error-continue>
+			</error-handler>
+		</try>
 		<logger level="INFO" doc:name="Payload" doc:id="c539d915-778c-4b3b-8536-a93a529ca9b6" message="#[payload]" />
 	</flow>
 </mule>

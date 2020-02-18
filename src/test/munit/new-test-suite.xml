@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:munit="http://www.mulesoft.org/schema/mule/munit" xmlns:munit-tools="http://www.mulesoft.org/schema/mule/munit-tools"
+	xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xsi:schemaLocation="
+		http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+		http://www.mulesoft.org/schema/mule/munit http://www.mulesoft.org/schema/mule/munit/current/mule-munit.xsd
+		http://www.mulesoft.org/schema/mule/munit-tools  http://www.mulesoft.org/schema/mule/munit-tools/current/mule-munit-tools.xsd">
+	<munit:config name="new-test-suite.xml" />
+	<munit:test name="new-test-suite-address-locator-apiFlowTest" doc:id="829f6d4b-1bd0-409f-85ec-bdb6d27a3bac" description="Test">
+		<munit:execution >
+			<munit:set-event doc:name="Set Event" doc:id="9de88773-f652-4028-92d7-2e2723da1d25" >
+				<munit:attributes value="[{uriParams:{country:'us',postal-code:'75254'}}]" />
+			</munit:set-event>
+			<flow-ref doc:name="Flow-ref to address-locator-apiFlow" doc:id="6d1a40e8-f001-41ec-934f-9ec0b46d6fb0" name="address-locator-apiFlow"/>
+		</munit:execution>
+		<munit:validation>
+			<munit-tools:assert-that doc:name="Assert that" doc:id="59586283-a897-44cf-b4b1-e4a5ea44c128" expression="#[payload]" is="#[MunitTools::notNullValue()]" message="payload is null"/>
+		</munit:validation>
+	</munit:test>
+
+
+</mule>
